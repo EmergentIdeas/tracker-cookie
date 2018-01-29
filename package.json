@@ -1,6 +1,6 @@
 {
   "name": "tracker-cookie",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Encrypt and decrypt little bits of information which get set on user cookies",
   "main": "tracker-cookie.js",
   "scripts": {

@@ -17,7 +17,10 @@ const createMiddleware = function(password, options) {
 			if(!password) {
 				let msg = 'No password specified to encrypt tracking token'
 				log.error(msg)
-				return callback(new Error(msg))
+				if(callback) {
+					return callback(new Error(msg))
+				}
+				return
 			}
 			if(info) {
 				try {
@@ -25,9 +28,18 @@ const createMiddleware = function(password, options) {
 						res.cookie(cookieName, sealed, {
 							maxAge: cookieMaxAge
 						})
-						callback()
+						if(callback) {
+							callback()
+						}
 					}, (err) => {
-						callback(err)
+						log.error({
+							problem: 'Could not seal tracked object',
+							error: err,
+							info: info
+						})
+						if(callback) {
+							callback(err)
+						}
 					})
 				}
 				catch(e) {
@@ -36,13 +48,16 @@ const createMiddleware = function(password, options) {
 						error: e,
 						info: info
 					})
-					callback(e)
+					if(callback) {
+						callback(e)
+					}
 				}
-				
-				
 			}
 			else {
 				res.clearCookie(cookieName)
+				if(callback) {
+					callback()
+				}
 			}
 		}
 		
@@ -61,16 +76,16 @@ const createMiddleware = function(password, options) {
 					log.error({
 						problem: 'Could not parsed tracked object',
 						error: e,
-						info: info
+						info: unsealed
 					})
 				}
 				next()
 			}, (err) => {
 				log.error({
-					problem: 'Could not parsed tracked object',
-					error: err,
-					info: info
+					problem: 'Could not unseal tracked object',
+					error: err
 				})
+				return next()
 			})
 		}
 		else {
