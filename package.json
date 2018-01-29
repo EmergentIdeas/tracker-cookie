@@ -1,0 +1,32 @@
+{
+  "name": "tracker-cookie",
+  "version": "1.0.0",
+  "description": "Encrypt and decrypt little bits of information which get set on user cookies",
+  "main": "tracker-cookie.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmergentIdeas/tracker-cookie.git"
+  },
+  "keywords": [
+    "session",
+    "user",
+    "tracking",
+    "encrypted",
+    "crypto",
+    "cookie",
+    "http"
+  ],
+  "author": "Dan Kolz (Emergent Ideas)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmergentIdeas/tracker-cookie/issues"
+  },
+  "homepage": "https://github.com/EmergentIdeas/tracker-cookie#readme",
+  "dependencies": {
+    "filter-log": "0.0.4",
+    "iron": "^5.0.4"
+  }
+}
