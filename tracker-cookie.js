@@ -1,4 +1,4 @@
-const Iron = require('iron')
+const Iron = require('@hapi/iron')
 const filog = require('filter-log')
 let log = filog('tracker-cookie')
 
@@ -81,6 +81,7 @@ const createMiddleware = function(password, options) {
 				}
 				next()
 			}, (err) => {
+				req[requestAttribute] = {}
 				log.error({
 					problem: 'Could not unseal tracked object',
 					error: err
@@ -89,6 +90,7 @@ const createMiddleware = function(password, options) {
 			})
 		}
 		else {
+			req[requestAttribute] = {}
 			next()
 		}
 		
